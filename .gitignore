@@ -1,0 +1,12 @@
+# Intellij
+.idea/
+out/
+*.iml
+*.iws
+
+# Compiled Files
+build/
+*.class
+
+# Gradle Files
+.gradle
