@@ -6,36 +6,15 @@ import io.netty.channel.socket.SocketChannel
 import io.netty.channel.socket.nio.NioSocketChannel
 import io.netty.handler.codec.DelimiterBasedFrameDecoder
 import io.netty.handler.codec.FixedLengthFrameDecoder
+import kotlinx.coroutines.*
+import rfidclient.RfidClient
 import java.net.InetSocketAddress
 
 fun main() {
-    /*
     RfidClient.listenForRfid("192.168.1.200", 4196) { rfid ->
-        HttpClient("localhost", 8080).addEntry(rfid) // suspending
-        ModbusClient("192.168.1.10", 1000).open
-    }
-    * */
-    val group = NioEventLoopGroup()
-    try {
-        val clientBootstrap = Bootstrap()
-        clientBootstrap.group(group)
-        clientBootstrap.channel(NioSocketChannel::class.java)
-        clientBootstrap.remoteAddress(InetSocketAddress("192.168.1.200", 4196))
-        clientBootstrap.handler(object : ChannelInitializer<SocketChannel>() {
-            override
-            fun initChannel(ch: SocketChannel?) {
-                ch?.pipeline()?.addLast(
-                    DelimiterBasedFrameDecoder(
-                        14, false, Unpooled.wrappedBuffer(ByteArray(1) { 3 })),
-                    RfidDecoder(),
-                    EntryAdderChannelHandler()
-                )
-            }
-        })
-        val channelFuture = clientBootstrap.connect().sync()
-        channelFuture.channel().closeFuture().sync()
-    } finally {
-        group.shutdownGracefully().sync()
+        println("Hehe. Rfid: $rfid")
+//        HttpClient("localhost", 8080).addEntry(rfid) // suspending
+//        ModbusClient("192.168.1.10", 1000).open
     }
 }
 
