@@ -1,33 +1,24 @@
-import io.netty.bootstrap.Bootstrap
-import io.netty.buffer.Unpooled
-import io.netty.channel.ChannelInitializer
-import io.netty.channel.nio.NioEventLoopGroup
-import io.netty.channel.socket.SocketChannel
-import io.netty.channel.socket.nio.NioSocketChannel
-import io.netty.handler.codec.DelimiterBasedFrameDecoder
-import io.netty.handler.codec.FixedLengthFrameDecoder
-import kotlinx.coroutines.*
+import httpclient.HttpClient
+import httpclient.Response
+import kotlinx.serialization.encodeToString
+import kotlinx.serialization.json.Json
+import httpclient.models.Entry
+import httpclient.models.ErrorResponse
 import rfidclient.RfidClient
-import java.net.InetSocketAddress
+import java.time.Instant
+import java.time.LocalDateTime
+import java.time.LocalTime
+import java.time.OffsetDateTime
+import java.time.format.DateTimeFormatter
+import java.time.format.DateTimeFormatterBuilder
+import java.util.*
 
 fun main() {
     RfidClient.listenForRfid("192.168.1.200", 4196) { rfid ->
-        println("Hehe. Rfid: $rfid")
-//        HttpClient("localhost", 8080).addEntry(rfid) // suspending
-//        ModbusClient("192.168.1.10", 1000).open
+        println("Rfid: $rfid")
+        when (val response = HttpClient().addEntry(rfid)) {
+            is Response.Success -> println(response.data)
+            is Response.Failure -> println(response.data)
+        }
     }
 }
-
-/*
-fun addEntry(rfid: String) {
-    val request = HttpRequest.newBuilder()
-        .uri(URI("http://localhost:8080/entry"))
-        .POST(HttpRequest.BodyPublishers.ofString(rfid))
-        .build()
-
-    val response = HttpClient.newBuilder()
-        .build()
-        .send(request, HttpResponse.BodyHandlers.ofString())
-
-    println(response.body())
-}*/

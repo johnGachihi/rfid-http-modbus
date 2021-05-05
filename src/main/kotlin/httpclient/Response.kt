@@ -1,6 +1,6 @@
 package httpclient
 
-import models.ErrorResponse
+import httpclient.models.ErrorResponse
 
 sealed class Response<out T> {
     data class Success<out T>(val data: T) : Response<T>()

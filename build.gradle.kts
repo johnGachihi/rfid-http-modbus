@@ -1,6 +1,7 @@
 plugins {
     java
     kotlin("jvm") version "1.4.32"
+    kotlin("plugin.serialization") version "1.4.32"
 }
 
 group = "org.example"
@@ -20,7 +21,10 @@ dependencies {
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")
     implementation ("com.squareup.retrofit2:converter-gson:$retrofitVersion")
     // coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.2")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core-jvm:1.4.3")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.3")
+    // kotlinx-serializer
+    implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
