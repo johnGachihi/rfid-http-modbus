@@ -25,6 +25,8 @@ dependencies {
     implementation("org.jetbrains.kotlinx:kotlinx-coroutines-jdk8:1.4.3")
     // kotlinx-serializer
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.1.0")
+    // Modbus
+    implementation("com.digitalpetri.modbus:modbus-master-tcp:1.2.0");
 
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
     testImplementation("org.junit.jupiter:junit-jupiter-api:5.6.0")
