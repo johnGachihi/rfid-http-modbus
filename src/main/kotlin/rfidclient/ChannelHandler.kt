@@ -8,7 +8,7 @@ class ChannelHandler(
     private val onRfidReceived: suspend (rfid: Int) -> Unit
 ) : SimpleChannelInboundHandler<Int>()
 {
-    override  fun messageReceived(ctx: ChannelHandlerContext?, rfid: Int) = runBlocking {
+    override fun channelRead0(ctx: ChannelHandlerContext?, rfid: Int) = runBlocking {
         onRfidReceived(rfid)
     }
 }

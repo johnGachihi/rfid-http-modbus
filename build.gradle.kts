@@ -14,8 +14,8 @@ repositories {
 dependencies {
     implementation(kotlin("stdlib"))
 
-    // netty-all
-    implementation("io.netty:netty-all:5.0.0.Alpha2")
+    // netty-all - This version required for Modbus dependency
+    implementation("io.netty:netty-all:4.1.48.Final")
     // retrofit
     val retrofitVersion = "2.9.0"
     implementation("com.squareup.retrofit2:retrofit:$retrofitVersion")

@@ -39,8 +39,4 @@ class RfidDecoder : ByteToMessageDecoder() {
 
         out?.add(rfid.toString(CharsetUtil.US_ASCII).toInt())
     }
-
-    override fun exceptionCaught(ctx: ChannelHandlerContext?, cause: Throwable?) {
-        super.exceptionCaught(ctx, cause)
-    }
 }
